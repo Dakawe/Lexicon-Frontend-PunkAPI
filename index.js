@@ -13,13 +13,12 @@ const randomize = (fetched = fetcher("/random")) =>
       beerlist.push(self);
       self.image_url ?? (self.image_url = "beer.png");
       document.querySelector("#randombeer").innerHTML = `
-      <div style="background-color: #${~~((Math.random() * 899999) + 100000)}; background-image: url('${self.image_url}')"></div>
+      <div style="background-color: #${~~(Math.random() * 899999 + 100000)}; background-image: url('${self.image_url}')"></div>
       <h2>${self.name}</h2>
-      <b>More Info</b><br>
+      <b id="moreInfo">More Info</b><br>
       <b id="anotherBeer">Another Beer</b>`;
-      document.getElementById("anotherBeer").addEventListener("click", () => {
-        randomize();
-      });
+      document.getElementById("anotherBeer").addEventListener("click", () => randomize());
+      document.getElementById("moreInfo").addEventListener("click", () => randomize());
     })
   );
 
