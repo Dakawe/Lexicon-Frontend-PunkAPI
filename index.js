@@ -8,7 +8,8 @@ const $ = (element = new String()) => document.querySelector(element),
     result.length && output.push(result) && (await StoreOutput(url, page + 1));
   },
   clearOldOutput = () => {
-    (output.length = 0), ($(`#results-pages`).innerHTML = ""), ($(`#results-list`).innerHTML = "");
+    (output.length = 0), ($(`#results-pages`).innerHTML = "");
+    $(`#results-pages`).style.visibility = "hidden";
   };
 
 $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target), search = "") => {
@@ -24,6 +25,7 @@ $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target)
   }
 
   await StoreOutput(search, 1);
+  $(`#results-pages`).style.visibility = "visible";
   for (const page in output) {
     $(`#results-pages`).innerHTML += `<p class="page-select">${+page + 1}</p>`;
   }
@@ -43,13 +45,13 @@ $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target)
         <img src="${self.image_url ?? "beer.png"}"><h3>${self.name}</h3>
         <section class="more-info">
         <p class="description"><b>ABOUT THE BEER </b>${self.description}</p>
-        <b>Alcohol percentage:</b><p>${self.abv}%</p>
+        <div><b>AlCohOl peRceNTaGe:</b><p>${self.abv}%</p></div>
         <b>Fluid volume:</b><p>${self.volume.value} ${self.volume.unit}</p>
-        <b>Malt:</b><p>${malt.join(`<br />`)}</p>
-        <b>Hops:</b><p>${hops.join(`<br />`)}</p>
-        <b>Yeast:</b><p>${self.ingredients.yeast}</p>
+        <b>MALT :</b><p>${malt.join(` | `)}</p>
+        <b>HopS :</b><p>${hops.join(` | `)}</p>
+        <b>YeaST :</b><p>${self.ingredients.yeast}</p>
         <p class="description"><b>A BREWERS ADVICE </b>${self.brewers_tips}</p>
-        <b>Works well with:</b><p>${self.food_pairing.join(`<br />`)}</p>
+        <b>Works well with:</b><p>${self.food_pairing.join(` <br> `)}</p>
         </section>
         </article>`;
 
@@ -69,3 +71,4 @@ $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target)
 $(`#abv`).oninput = function () {
   $(`#abv-output`).innerText = `${this.value}%`;
 };
+$;

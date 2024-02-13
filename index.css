@@ -2,10 +2,30 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+@font-face {
+  font-family: beer;
+  src: url(Barriecito-Regular.ttf);
+}
 body {
   display: flex;
   flex-direction: column;
+  background-image: url(bg-beer.jpg);
+}
+#punky {
+  color: White;
+  position: absolute;
+  transform: rotate(-28deg);
+  top: 150px;
+  left: 25px;
+  font-family: beer;
+  font-size: 66px;
+  span {
+    color: orange;
+    font-size: 77px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 100%;
+    border: 5px dotted rgb(255, 255, 255);
+  }
 }
 #search {
   display: flex;
@@ -28,6 +48,7 @@ body {
   gap: 4px;
   justify-content: center;
   article {
+    position: relative;
     list-style: none;
     flex: 0 0 25%;
     flex-direction: column;
@@ -41,24 +62,38 @@ body {
     width: auto;
     object-fit: contain;
     padding: 15px;
-    transition: 0.3s linear;
+    transition: 0.25s linear;
+    border-top-left-radius: 44%;
+    background-color: rgb(255, 255, 255);
+    border-top: 19px solid rgb(0, 0, 0);
   }
   img:hover {
-    scale: 1.24;
+    background-color: rgb(255, 174, 13);
+    box-shadow: 25px 45px 50px black;
   }
   h3 {
-    padding: 15px;
+    border-top: 5px dotted rgb(255, 255, 255);
+    border-bottom: 5px dotted rgb(255, 255, 255);
+    z-index: 1;
+    padding: 25px;
     text-align: center;
-    font-family: consolas;
-    background-color: antiquewhite;
+    font-family: beer;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    background-color: rgb(0, 0, 0);
+    border-bottom-right-radius: 44%;
   }
 }
 #results-pages {
   display: flex;
   position: relative;
-  gap: 10px;
+  gap: 15px;
   font-size: 25px;
   font-family: consolas;
+  background-color: white;
+  padding: 25px 50px;
+  border-radius: 25%;
+  visibility: hidden;
   .page-select {
     cursor: pointer;
   }
@@ -67,12 +102,17 @@ body {
 }
 
 .description {
+  transform: rotate(2deg);
   font-size: 14px;
-  font-family: consolas;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 15px;
   background-color: rgb(0, 0, 0);
   margin: 10px;
-  color: white;
+  border: 4px solid rgb(255, 255, 255);
+  border-top-right-radius: 25%;
+  border-bottom-left-radius: 25%;
+  color: rgb(255, 255, 255);
+
   b {
     color: rgb(255, 113, 73);
     font-size: 20px;
@@ -81,31 +121,66 @@ body {
 
 .more-info {
   word-wrap: break-word;
-  padding: 0 15px;
+  padding: 25px 25px;
+  padding-top: 100px;
   display: none;
+  background-color: rgb(222, 197, 116);
+  border-bottom-right-radius: 7%;
+  border-bottom-left-radius: 4%;
+  font-family: consolas;
+  font-size: 15px;
+  margin-top: -66px;
+  transition: 1s linear;
+  border-bottom: 8px solid black;
+  border-right: 2px solid black;
+  box-shadow: 66px 66px 100px black;
+  b {
+    font-size: 20px;
+    font-family: beer;
+  }
+  p {
+    background-color: black;
+    border: 3px dotted orange;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 5px 5px 6px black;
+  }
 }
 
 form {
-  background-color: rgb(201, 178, 178);
+  background-color: rgb(0, 0, 0);
   padding: 35px;
-  border: 5px solid rgb(142, 89, 89);
-  border-bottom-left-radius: 25px;
+  color: orange;
+  border: 9px dotted rgb(255, 255, 255);
+  border-bottom: 9px solid rgb(255, 255, 255);
+  border-bottom-left-radius: 88px;
   border-bottom-right-radius: 25px;
+  border-top-right-radius: 44px;
   border-top: none;
+  font-family: consolas;
+  input {
+    padding: 5px;
+    font-family: consolas;
+  }
 }
 
 #submit {
   width: 75%;
   padding: 5px 15px;
   align-self: center;
-  border: 4px solid rgb(135, 54, 54);
-  background-color: rgb(52, 19, 19);
-  color: rgb(220, 171, 153);
+  border: 7px dotted rgb(255, 255, 255);
+  border-right: 7px solid rgb(255, 255, 255);
+  background-color: rgb(53, 46, 29);
+  color: rgb(255, 255, 255);
   margin-top: 25px;
-  font-size: 20px;
-  font-family: verdana;
+  font-size: 33px;
+  font-family: beer;
   cursor: pointer;
+  border-radius: 25px;
 }
 #submit:hover {
-  background-color: black;
+  background-color: rgb(255, 170, 0);
+  color: black;
+  content: "hello";
 }
