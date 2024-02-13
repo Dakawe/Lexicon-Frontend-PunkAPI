@@ -11,9 +11,12 @@ const $ = (element = new String()) => document.querySelector(element),
     (output.length = 0), ($(`#results-pages`).innerHTML = ""), ($(`#results-list`).innerHTML = "");
   };
 
-$(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target), search) => {
+$(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target), search = "") => {
   e.preventDefault(), clearOldOutput();
-  search = `beer_name=${input.get("beer")}`;
+  console.log(input.get("beer"));
+  input.get("beer") && (search += `beer_name=${input.get("beer")}&`);
+  +$(`#abv`).value && (search += `abv_lt=${$(`#abv`).value}&`);
+  console.log(search);
   await StoreOutput(search, 1);
   for (const page in output) {
     $(`#results-pages`).innerHTML += `<p class="page-select">${+page + 1}</p>`;
@@ -22,9 +25,41 @@ $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target)
     page.addEventListener(`click`, (p) => {
       $(`#results-list`).innerHTML = "";
       for (const self of output[+p.target.innerText - 1]) {
-        
-        $(`#results-list`).innerHTML += `<article><img src="${self.image_url ?? "beer.png"}"><h3>${self.name}</h3></article>`;
+        const malt = [],
+          hops = [];
+        for (const i of self.ingredients.malt) {
+          malt.includes(i.name) || malt.push(i.name);
+        }
+        for (const i of self.ingredients.hops) {
+          hops.includes(i.name) || hops.push(i.name);
+        }
+        $(`#results-list`).innerHTML += `<article>
+        <img src="${self.image_url ?? "beer.png"}"><h3>${self.name}</h3>
+        <section class="more-info">
+        <p class="description"><b>ABOUT THE BEER </b>${self.description}</p>
+        <b>Alcohol percentage:</b><p>${self.abv}%</p>
+        <b>Fluid volume:</b><p>${self.volume.value} ${self.volume.unit}</p>
+        <b>Malt:</b><p>${malt.join(`<br />`)}</p>
+        <b>Hops:</b><p>${hops.join(`<br />`)}</p>
+        <b>Yeast:</b><p>${self.ingredients.yeast}</p>
+        <p class="description"><b>A BREWERS ADVICE </b>${self.brewers_tips}</p>
+        <b>Works well with:</b><p>${self.food_pairing.join(`<br />`)}</p>
+        </section>
+        </article>`;
+
+        document.querySelectorAll(`#results-list article`).forEach((page) =>
+          page.addEventListener(`click`, (e) => {
+            const target = e.target.closest("article").querySelector(".more-info");
+            const info = window.getComputedStyle(target);
+            info.display == "none" ? (target.style.display = "block") : (target.style.display = "none");
+          })
+        );
       }
-    }));
-    $(".page-select").click();
+    })
+  );
+  $(".page-select").click();
 });
+
+$(`#abv`).oninput = function () {
+  $(`#abv-output`).innerText = `${this.value}%`;
+};

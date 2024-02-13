@@ -10,12 +10,15 @@
     <form id="search">
       <label for="beer">Product:</label>
       <input type="text" name="beer" id="beer" />
-      <input type="submit" id="submit" value="submit" />
+      <label for="abv">Alcohol:</label>
+      <input type="range" min="0" max="100" value="5" class="slider" name="abv" id="abv" />
+      <b id="abv-output">5%</b>
+      <input type="submit" id="submit" value="Search" />
     </form>
     <main id="results-main">
-    <p id="results-browse-total"></p>
-    <section id="results-list"></section>
-    <section id="results-pages"></section>
+      <p id="results-browse-total"></p>
+      <section id="results-list"></section>
+      <section id="results-pages"></section>
     </main>
     <script src="index.js" type="module"></script>
   </body>
