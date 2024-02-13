@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <section id="search"></section>
-    <section id="randombeer"></section>
+    <form id="search">
+      <label for="beer">Product:</label>
+      <input type="text" name="beer" id="beer" />
+      <input type="submit" id="submit" value="submit" />
+    </form>
+    <main id="results-main">
+    <p id="results-browse-total"></p>
+    <section id="results-list"></section>
+    <section id="results-pages"></section>
+    </main>
     <script src="index.js" type="module"></script>
   </body>
 </html>
