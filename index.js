@@ -1,6 +1,6 @@
 const $ = (element = new String()) => document.querySelector(element),
   output = [],
-  FetchAPI = async (url_addon = "", page, url = `https://api.punkapi.com/v2/beers?${url_addon}&page=${page}&per_page=9`) => {
+  FetchAPI = async (url_addon = "", page, url = `https://api.punkapi.com/v2/beers?${url_addon}&page=${page}&per_page=6`) => {
     return await (await fetch(url)).json();
   },
   StoreOutput = async (url, page, result) => {
@@ -13,10 +13,16 @@ const $ = (element = new String()) => document.querySelector(element),
 
 $(`#search`).addEventListener(`submit`, async (e, input = new FormData(e.target), search = "") => {
   e.preventDefault(), clearOldOutput();
-  console.log(input.get("beer"));
-  input.get("beer") && (search += `beer_name=${input.get("beer")}&`);
+  if (input.get("beer") == "") {
+    return console.error("NO BEERDATA");
+  }
+  search += `beer_name=${input.get("beer")}&`;
   +$(`#abv`).value && (search += `abv_lt=${$(`#abv`).value}&`);
-  console.log(search);
+
+  if (search == "") {
+    return console.error("NO SEARCHDATA");
+  }
+
   await StoreOutput(search, 1);
   for (const page in output) {
     $(`#results-pages`).innerHTML += `<p class="page-select">${+page + 1}</p>`;

@@ -7,7 +7,13 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+#search {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 300px;
+  align-self: center;
+}
 #results-main {
   display: flex;
   flex-direction: column;
@@ -35,6 +41,10 @@ body {
     width: auto;
     object-fit: contain;
     padding: 15px;
+    transition: 0.3s linear;
+  }
+  img:hover {
+    scale: 1.24;
   }
   h3 {
     padding: 15px;
@@ -73,4 +83,29 @@ body {
   word-wrap: break-word;
   padding: 0 15px;
   display: none;
+}
+
+form {
+  background-color: rgb(201, 178, 178);
+  padding: 35px;
+  border: 5px solid rgb(142, 89, 89);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top: none;
+}
+
+#submit {
+  width: 75%;
+  padding: 5px 15px;
+  align-self: center;
+  border: 4px solid rgb(135, 54, 54);
+  background-color: rgb(52, 19, 19);
+  color: rgb(220, 171, 153);
+  margin-top: 25px;
+  font-size: 20px;
+  font-family: verdana;
+  cursor: pointer;
+}
+#submit:hover {
+  background-color: black;
 }

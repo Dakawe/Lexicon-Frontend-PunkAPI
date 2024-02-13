@@ -8,11 +8,14 @@
   </head>
   <body>
     <form id="search">
-      <label for="beer">Product:</label>
-      <input type="text" name="beer" id="beer" />
-      <label for="abv">Alcohol:</label>
-      <input type="range" min="0" max="100" value="5" class="slider" name="abv" id="abv" />
-      <b id="abv-output">5%</b>
+      <div>
+        <label for="beer">Product:</label>
+        <input type="text" name="beer" id="beer" />
+      </div>
+      <div>
+        <label for="abv">Alcohol:</label><b id="abv-output">0%</b>
+        <input type="range" min="0" max="100" value="0" class="slider" name="abv" id="abv" />
+      </div>
       <input type="submit" id="submit" value="Search" />
     </form>
     <main id="results-main">
